@@ -77,18 +77,41 @@ function AC.ToggleMiniMenuOrientation()
     print("Azeroth Command: minimenu "..string.lower(style.minimenuOrientation)..".")
 end
 
--- These controls are deliberately NOT placed in ma_midframe: that frame is already packed with upstream commands.
--- They live in the title area, where they cannot overlap Parameter(s), Clear Params or Grid Navigator.
+local function StyleCustomButton(button)
+    if not button or not AzerothAdmin or not AzerothAdmin.db then return end
+    local c=AzerothAdmin.db.profile.style.color.buttons or THEME.buttons
+    local r,g,b=c.r or THEME.buttons.r,c.g or THEME.buttons.g,c.b or THEME.buttons.b
+    button:SetBackdrop({
+        bgFile="Interface\\ChatFrame\\ChatFrameBackground",
+        edgeFile="Interface\\Buttons\\WHITE8X8",
+        tile=true,tileSize=8,edgeSize=1,
+        insets={left=1,right=1,top=1,bottom=1}
+    })
+    button:SetBackdropColor(r,g,b,0.98)
+    button:SetBackdropBorderColor(math.min(1,r+0.18),math.min(1,g+0.18),math.min(1,b+0.18),1)
+    button:SetNormalTexture(nil); button:SetPushedTexture(nil); button:SetHighlightTexture(nil); button:SetDisabledTexture(nil)
+    local fs=button:GetFontString()
+    if fs then fs:SetTextColor(1,0.82,0,1) end
+end
+
+-- Custom controls live in the title area and use the exact same flat dark style as the addon buttons.
 local function CreateCustomControls()
     if not ma_topframe then return end
     if not ma_ac_orientation_button then
-        local b=CreateFrame("Button","ma_ac_orientation_button",ma_topframe,"UIPanelButtonTemplate")
-        b:SetSize(105,20); b:SetPoint("TOPRIGHT",ma_topframe,"TOPRIGHT",-125,-45); b:SetText("Mini: V/H"); b:SetScript("OnClick",AC.ToggleMiniMenuOrientation)
-        b:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self,"ANCHOR_TOP"); GameTooltip:SetText("Minimenu orientation",1,.82,.25); GameTooltip:AddLine("Toggle vertical / horizontal minimenu.",1,1,1,true); GameTooltip:Show() end); b:SetScript("OnLeave",function() GameTooltip:Hide() end)
+        local b=CreateFrame("Button","ma_ac_orientation_button",ma_topframe)
+        b:SetSize(105,20); b:SetPoint("TOPRIGHT",ma_topframe,"TOPRIGHT",-125,-45)
+        local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Mini: V/H")
+        b:SetScript("OnClick",AC.ToggleMiniMenuOrientation)
+        b:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self,"ANCHOR_TOP"); GameTooltip:SetText("Minimenu orientation",1,.82,.25); GameTooltip:AddLine("Toggle vertical / horizontal minimenu.",1,1,1,true); GameTooltip:Show() end)
+        b:SetScript("OnLeave",function() GameTooltip:Hide() end)
+        StyleCustomButton(b)
     end
     if not ma_ac_reset_theme_button then
-        local b=CreateFrame("Button","ma_ac_reset_theme_button",ma_topframe,"UIPanelButtonTemplate")
-        b:SetSize(105,20); b:SetPoint("TOPRIGHT",ma_topframe,"TOPRIGHT",-15,-45); b:SetText("Reset Theme"); b:SetScript("OnClick",function() AC.ApplyDefaultTheme(true) end)
+        local b=CreateFrame("Button","ma_ac_reset_theme_button",ma_topframe)
+        b:SetSize(105,20); b:SetPoint("TOPRIGHT",ma_topframe,"TOPRIGHT",-15,-45)
+        local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Reset Theme")
+        b:SetScript("OnClick",function() AC.ApplyDefaultTheme(true) end)
+        StyleCustomButton(b)
     end
 end
 
@@ -114,7 +137,7 @@ local function ApplyBrandingAndSafety()
     if ma_reloadscriptsbutton then ma_reloadscriptsbutton:SetText("Reload ALE") end
     if ma_reloadtabledropdown and UIDropDownMenu_SetSelectedValue then UIDropDownMenu_SetSelectedValue(ma_reloadtabledropdown,"creature_template"); UIDropDownMenu_SetText(ma_reloadtabledropdown,"creature_template") end
     if ma_bgframe and ma_bgframe.SetBackdrop then ma_bgframe:SetBackdrop({bgFile="Interface\\DialogFrame\\UI-DialogBox-Background-Dark",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=16,edgeSize=14,insets={left=4,right=4,top=4,bottom=4}}); ma_bgframe:SetBackdropColor(.015,.018,.025,.98); ma_bgframe:SetBackdropBorderColor(.42,.34,.12,1) end
-    CreateCustomControls(); SkinActionButtons(); AC.ApplyMiniMenuOrientation()
+    CreateCustomControls(); SkinActionButtons(); StyleCustomButton(ma_ac_orientation_button); StyleCustomButton(ma_ac_reset_theme_button); AC.ApplyMiniMenuOrientation()
     if ma_mm_logoframe then
         ma_mm_logoframe:RegisterForClicks("LeftButtonUp"); ma_mm_logoframe:SetScript("OnClick",function() if IsShiftKeyDown() then ReloadUI() else AzerothAdmin:ToggleMiniMenu() end end)
         ma_mm_logoframe:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self,"ANCHOR_LEFT"); GameTooltip:SetText("Azeroth Command",1,.82,.25); GameTooltip:AddLine("Left click: open/close",1,1,1,true); GameTooltip:AddLine("Ctrl + drag: move",.7,.7,.7,true); GameTooltip:AddLine("Shift + click: Reload UI",.7,.7,.7,true); GameTooltip:Show() end); ma_mm_logoframe:SetScript("OnLeave",function() GameTooltip:Hide() end)
