@@ -85,21 +85,21 @@ local function StyleCustomButton(button)
     local fs=button:GetFontString(); if fs then fs:SetTextColor(1,0.82,0,1) end
 end
 
--- Use the large free center area of the header, away from character/realm info on the right.
+-- Compact custom controls in the free header area.
 local function CreateCustomControls()
     if not ma_topframe then return end
     if not ma_ac_orientation_button then
         local b=CreateFrame("Button","ma_ac_orientation_button",ma_topframe)
-        b:SetSize(115,22); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",430,-48)
-        local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Mini: V/H")
+        b:SetSize(88,18); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",430,-50)
+        local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Mini: V/H")
         b:SetScript("OnClick",AC.ToggleMiniMenuOrientation)
         b:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self,"ANCHOR_TOP"); GameTooltip:SetText("Minimenu orientation",1,.82,.25); GameTooltip:AddLine("Toggle vertical / horizontal minimenu.",1,1,1,true); GameTooltip:Show() end)
         b:SetScript("OnLeave",function() GameTooltip:Hide() end); StyleCustomButton(b)
     end
     if not ma_ac_reset_theme_button then
         local b=CreateFrame("Button","ma_ac_reset_theme_button",ma_topframe)
-        b:SetSize(115,22); b:SetPoint("LEFT",ma_ac_orientation_button,"RIGHT",8,0)
-        local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Reset Theme")
+        b:SetSize(88,18); b:SetPoint("LEFT",ma_ac_orientation_button,"RIGHT",6,0)
+        local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Reset Theme")
         b:SetScript("OnClick",function() AC.ApplyDefaultTheme(true) end); StyleCustomButton(b)
     end
 end
