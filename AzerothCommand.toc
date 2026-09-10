@@ -78,4 +78,5 @@ Frames\Frames_SectionServer.lua
 Frames\Frames_SectionNpc.lua
 Frames\Frames_SectionGO.lua
 Frames\Frames.lua
+Core\AzerothCommandLocale.lua
 Core\AzerothCommandCustom.lua
