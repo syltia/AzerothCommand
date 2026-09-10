@@ -90,7 +90,7 @@ local function CreateCustomControls()
     if not ma_topframe then return end
     if not ma_ac_orientation_button then
         local b=CreateFrame("Button","ma_ac_orientation_button",ma_topframe)
-        b:SetSize(88,18); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",430,-50)
+        b:SetSize(88,18); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",330,-50)
         local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Mini: V/H")
         b:SetScript("OnClick",AC.ToggleMiniMenuOrientation)
         b:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self,"ANCHOR_TOP"); GameTooltip:SetText("Minimenu orientation",1,.82,.25); GameTooltip:AddLine("Toggle vertical / horizontal minimenu.",1,1,1,true); GameTooltip:Show() end)
