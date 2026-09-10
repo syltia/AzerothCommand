@@ -6,8 +6,6 @@
 local AC = {}
 AzerothCommandCustom = AC
 
-local function Text(fr, en) return en end
-
 local THEME = {
     backgrounds = { r = 0.018, g = 0.022, b = 0.030 },
     frames      = { r = 0.050, g = 0.060, b = 0.080 },
@@ -81,37 +79,28 @@ local function StyleCustomButton(button)
     if not button or not AzerothAdmin or not AzerothAdmin.db then return end
     local c=AzerothAdmin.db.profile.style.color.buttons or THEME.buttons
     local r,g,b=c.r or THEME.buttons.r,c.g or THEME.buttons.g,c.b or THEME.buttons.b
-    button:SetBackdrop({
-        bgFile="Interface\\ChatFrame\\ChatFrameBackground",
-        edgeFile="Interface\\Buttons\\WHITE8X8",
-        tile=true,tileSize=8,edgeSize=1,
-        insets={left=1,right=1,top=1,bottom=1}
-    })
-    button:SetBackdropColor(r,g,b,0.98)
-    button:SetBackdropBorderColor(math.min(1,r+0.18),math.min(1,g+0.18),math.min(1,b+0.18),1)
+    button:SetBackdrop({bgFile="Interface\\ChatFrame\\ChatFrameBackground",edgeFile="Interface\\Buttons\\WHITE8X8",tile=true,tileSize=8,edgeSize=1,insets={left=1,right=1,top=1,bottom=1}})
+    button:SetBackdropColor(r,g,b,0.98); button:SetBackdropBorderColor(math.min(1,r+0.18),math.min(1,g+0.18),math.min(1,b+0.18),1)
     button:SetNormalTexture(nil); button:SetPushedTexture(nil); button:SetHighlightTexture(nil); button:SetDisabledTexture(nil)
-    local fs=button:GetFontString()
-    if fs then fs:SetTextColor(1,0.82,0,1) end
+    local fs=button:GetFontString(); if fs then fs:SetTextColor(1,0.82,0,1) end
 end
 
--- Custom controls aligned above the AllSpeeds area.
+-- Use the large free center area of the header, away from character/realm info on the right.
 local function CreateCustomControls()
     if not ma_topframe then return end
     if not ma_ac_orientation_button then
         local b=CreateFrame("Button","ma_ac_orientation_button",ma_topframe)
-        b:SetSize(105,20); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",470,-45)
+        b:SetSize(115,22); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",430,-48)
         local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Mini: V/H")
         b:SetScript("OnClick",AC.ToggleMiniMenuOrientation)
         b:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self,"ANCHOR_TOP"); GameTooltip:SetText("Minimenu orientation",1,.82,.25); GameTooltip:AddLine("Toggle vertical / horizontal minimenu.",1,1,1,true); GameTooltip:Show() end)
-        b:SetScript("OnLeave",function() GameTooltip:Hide() end)
-        StyleCustomButton(b)
+        b:SetScript("OnLeave",function() GameTooltip:Hide() end); StyleCustomButton(b)
     end
     if not ma_ac_reset_theme_button then
         local b=CreateFrame("Button","ma_ac_reset_theme_button",ma_topframe)
-        b:SetSize(105,20); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",580,-45)
+        b:SetSize(115,22); b:SetPoint("LEFT",ma_ac_orientation_button,"RIGHT",8,0)
         local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Reset Theme")
-        b:SetScript("OnClick",function() AC.ApplyDefaultTheme(true) end)
-        StyleCustomButton(b)
+        b:SetScript("OnClick",function() AC.ApplyDefaultTheme(true) end); StyleCustomButton(b)
     end
 end
 
