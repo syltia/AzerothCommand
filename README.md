@@ -1,40 +1,42 @@
-# AzerothAdmin v3.3.5
+# Azeroth Command
 
-![GitHub Logo](/Textures/logo.png)
+Azeroth Command is a customized fork of [AzerothAdmin](https://github.com/superstyro/AzerothAdmin) for **AzerothCore 3.3.5a**.
 
-AzerothAdmin is a general interface add-on which will help admins and GMs in-game for AzerothCore.
+The goal of this fork is to keep the proven AzerothAdmin command layer while providing a cleaner WoW-style dark interface and server-administration conveniences for an AzerothCore + ALE/Eluna setup.
 
-## INSTRUCTIONS
+## Current customizations
 
-### Installation
+- Azeroth Command branding.
+- Dark interface palette using normalized WoW RGB values.
+- Button borders follow the selected button color.
+- One-click **Reload ALE** (`.reload ale`).
+- `Reload Scripts` also uses `.reload ale`.
+- Dangerous `.reload all` is blocked in the GUI; reload table defaults to `creature_template`.
+- Mini toolbar can be switched between vertical and horizontal from the MISC tab.
+- Theme reset button restores the default Azeroth Command dark palette.
+- English and French locales enabled.
+- Legacy `/azerothadmin` and `/aa` commands retained for compatibility; `/azerothcommand` and `/ac` are added.
 
-1. **Download** the latest release from [Releases](https://github.com/superstyro/AzerothAdmin/releases)
-   - File format: `AzerothAdmin-{version}.zip` (e.g., `AzerothAdmin-17.zip`)
+## Installation
 
-2. **Extract** the downloaded ZIP file to your `World of Warcraft/Interface/AddOns/` folder
+Copy the addon folder to:
 
-3. **Verify** the following two addon folders are created:
+```text
+World of Warcraft/Interface/AddOns/AzerothCommand
+```
 
-   ```text
-   World of Warcraft/Interface/AddOns/
-   ├── AzerothAdmin/         (Main addon - 1.9 MB)
-   └── AzerothAdmin_Models/  (Model database - 5.6 MB, loads on-demand)
-   ```
+The folder must be named **AzerothCommand** because the addon uses that path for its assets. If you downloaded GitHub's source ZIP, rename the extracted `AzerothCommand-master` folder to `AzerothCommand`.
 
-**Important:** Both addons are required for full functionality. The `AzerothAdmin_Models` addon loads automatically when you use the GameObject model viewer.
+Then restart WoW or use `/reload`.
 
-## Impotant Information
+This addon is **client-side only**. It sends GM commands to AzerothCore; no Azeroth Command server module is required.
 
-### This new version of AzerothAdmin contains many changes over previous versions
+## Compatibility note
 
-- AzerothAdmin v3.3.5 supports client version 3.3.5 only.
-  - It does not officially support 1.x, 2.x or 4.x installs.
-- AzerothAdmin supports AzerothCore server 3.3.5 ONLY.
-  - Some Functions may work with TrinityCore
-  - It may or may not work with MaNGOS, Arc, Ascent, Hearthstone, or any other emu.
+The internal Lua/AceAddon namespace and SavedVariables still use `AzerothAdmin` names on purpose. Keeping those internal identifiers avoids breaking upstream code and existing user settings while the visible project is branded Azeroth Command.
 
-## SCREENSHOT
+## Upstream and license
 
-![image](/Textures/AA_char.jpg)
-![image](/Textures/AA_gm.jpg)
-![image](/Textures/AA_server.jpg)
+Upstream: https://github.com/superstyro/AzerothAdmin
+
+Azeroth Command remains distributed under the upstream **GPLv3** license. Original copyright notices and attribution are preserved in source files.
