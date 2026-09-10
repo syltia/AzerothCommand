@@ -1,25 +1,41 @@
-# AzerothAdmin
+# Azeroth Command — Credits
 
-## CREDITS
+Azeroth Command is a fork of **AzerothAdmin** for AzerothCore 3.3.5a.
 
-Original Locale Team: iotech, Ravenheart, Gimp, Dracula70, MrLakeC, Namida, Amok, Lyrr123, borgotech, Morpheux, Georgios, Kitharo  
+## Upstream project
 
-AzerothAdmin Locale Contributors: iotech, Ravenheart, Gimp, Dracula70, MrLakeC, Namida, Amok, Lyrr123, borgotech, Morpheux, Georgios, Kitharo  
+AzerothAdmin is maintained by **SuperStyro** and contributors.
 
-TrinityAdmin(MangAdmin) developed by: Josh, iotech, infamousblob, Atreus420, killat200623, dragonfrost, Necroblack  
+Original project: https://github.com/superstyro/AzerothAdmin
 
-AzerothAdmin developed by: [SuperStyro (Project Owner)](https://github.com/superstyro), [Stuntmonkey4u](https://github.com/Stuntmonkey4u), [claude(AI)](https://github.com/claude)  
+## Project lineage
 
-### Code Origination/Contributions
+AzerothAdmin is derived from TrinityAdmin / MangAdmin.
 
-TrinityAdmin is derived from MangAdmin.  
-TrinityAdmin v2 was maintained and developed by **iotech**  
-AzerothAdmin is derived from TrinityAdmin.  
-AzerothAdmin is maintained and developed by **SuperStyro**  
+Credits from the upstream project include:
+- iotech
+- Ravenheart
+- Gimp
+- Dracula70
+- MrLakeC
+- Namida
+- Amok
+- Lyrr123
+- borgotech
+- Morpheux
+- Georgios
+- Kitharo
+- Josh
+- infamousblob
+- Atreus420
+- killat200623
+- dragonfrost
+- Necroblack
+- Pryd
+- Shocker
 
-AzerothAdmin contains code from TrinityAdmin/MangAdmin  
+## Azeroth Command fork
 
-TrinityAdmin/AzerothAdmin contains code donated by:  
- -**Pryd** (teleport work)  
- -**Gimp** (teleport work)  
- -**Shocker** (various)  
+Fork maintained by **syltia**.
+
+The fork keeps upstream attribution and license terms while adding its own branding, interface changes, localization work, and AzerothCore/ALE-specific behavior.
