@@ -94,12 +94,12 @@ local function StyleCustomButton(button)
     if fs then fs:SetTextColor(1,0.82,0,1) end
 end
 
--- Custom controls live in the title area and use the exact same flat dark style as the addon buttons.
+-- Custom controls aligned above the AllSpeeds area.
 local function CreateCustomControls()
     if not ma_topframe then return end
     if not ma_ac_orientation_button then
         local b=CreateFrame("Button","ma_ac_orientation_button",ma_topframe)
-        b:SetSize(105,20); b:SetPoint("TOPRIGHT",ma_topframe,"TOPRIGHT",-125,-45)
+        b:SetSize(105,20); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",470,-45)
         local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Mini: V/H")
         b:SetScript("OnClick",AC.ToggleMiniMenuOrientation)
         b:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self,"ANCHOR_TOP"); GameTooltip:SetText("Minimenu orientation",1,.82,.25); GameTooltip:AddLine("Toggle vertical / horizontal minimenu.",1,1,1,true); GameTooltip:Show() end)
@@ -108,7 +108,7 @@ local function CreateCustomControls()
     end
     if not ma_ac_reset_theme_button then
         local b=CreateFrame("Button","ma_ac_reset_theme_button",ma_topframe)
-        b:SetSize(105,20); b:SetPoint("TOPRIGHT",ma_topframe,"TOPRIGHT",-15,-45)
+        b:SetSize(105,20); b:SetPoint("TOPLEFT",ma_topframe,"TOPLEFT",580,-45)
         local fs=b:CreateFontString(nil,"OVERLAY","GameFontNormal"); fs:SetPoint("CENTER"); b:SetFontString(fs); b:SetText("Reset Theme")
         b:SetScript("OnClick",function() AC.ApplyDefaultTheme(true) end)
         StyleCustomButton(b)
